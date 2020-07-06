@@ -6,7 +6,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/go-shiori/shiori/internal/database"
+	"github.com/emptyhua/shiori/internal/database"
 	"github.com/julienschmidt/httprouter"
 	cch "github.com/patrickmn/go-cache"
 	"github.com/sirupsen/logrus"

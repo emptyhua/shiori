@@ -6,9 +6,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/go-shiori/shiori/internal/core"
-	"github.com/go-shiori/shiori/internal/database"
-	"github.com/go-shiori/shiori/internal/model"
+	"github.com/emptyhua/shiori/internal/core"
+	"github.com/emptyhua/shiori/internal/database"
+	"github.com/emptyhua/shiori/internal/model"
 	"github.com/spf13/cobra"
 )
 

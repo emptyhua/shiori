@@ -5,7 +5,7 @@ import (
 	"os"
 	fp "path/filepath"
 
-	"github.com/go-shiori/shiori/internal/database"
+	"github.com/emptyhua/shiori/internal/database"
 	apppaths "github.com/muesli/go-app-paths"
 	"github.com/spf13/cobra"
 )

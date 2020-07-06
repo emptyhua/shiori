@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/go-shiori/shiori/internal/cmd"
+	"github.com/emptyhua/shiori/internal/cmd"
 	"github.com/sirupsen/logrus"
 
 	// Database driver

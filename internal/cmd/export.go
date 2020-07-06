@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-shiori/shiori/internal/database"
+	"github.com/emptyhua/shiori/internal/database"
 	"github.com/spf13/cobra"
 )
 
