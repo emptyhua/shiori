@@ -137,7 +137,7 @@ func (h *handler) serveBookmarkContent(w http.ResponseWriter, r *http.Request, p
 		doc, err := goquery.NewDocumentFromReader(buffer)
 		checkError(err)
 
-        doc.Find("base").Remove()
+		doc.Find("base").Remove()
 
 		doc.Find("img, picture, figure, source").Each(func(_ int, node *goquery.Selection) {
 			// Get the needed attributes
@@ -282,6 +282,9 @@ func (h *handler) serveBookmarkArchive(w http.ResponseWriter, r *http.Request, p
 		// Parse gzipped content
 		doc, err := goquery.NewDocumentFromReader(gzipReader)
 		checkError(err)
+
+		// remove base tag
+		doc.Find("base").Remove()
 
 		// Add Shiori overlay
 		tplOutput := bytes.NewBuffer(nil)
