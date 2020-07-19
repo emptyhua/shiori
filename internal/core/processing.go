@@ -1,8 +1,11 @@
 package core
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
+	"golang.org/x/net/html/charset"
+	"golang.org/x/text/transform"
 	"image"
 	"image/color"
 	"image/draw"
@@ -16,8 +19,8 @@ import (
 	"strings"
 
 	"github.com/disintegration/imaging"
-	"github.com/go-shiori/go-readability"
 	"github.com/emptyhua/shiori/internal/model"
+	"github.com/go-shiori/go-readability"
 	"github.com/go-shiori/warc"
 
 	// Add support for png
@@ -46,32 +49,42 @@ func ProcessBookmark(req ProcessRequest) (model.Bookmark, bool, error) {
 		return book, true, fmt.Errorf("bookmark ID is not valid")
 	}
 
-	// Split bookmark content so it can be processed several times
-	archivalInput := bytes.NewBuffer(nil)
-	readabilityInput := bytes.NewBuffer(nil)
-	readabilityCheckInput := bytes.NewBuffer(nil)
-
-	var multiWriter io.Writer
-	if !strings.Contains(contentType, "text/html") {
-		multiWriter = io.MultiWriter(archivalInput)
-	} else {
-		multiWriter = io.MultiWriter(archivalInput, readabilityInput, readabilityCheckInput)
-	}
-
-	_, err := io.Copy(multiWriter, req.Content)
+	contentBuffer := bytes.NewBuffer(nil)
+	_, err := io.Copy(contentBuffer, req.Content)
 	if err != nil {
 		return book, false, fmt.Errorf("failed to process article: %v", err)
 	}
+	contentReader := bytes.NewReader(contentBuffer.Bytes())
+	var archiveReader io.Reader = contentReader
+
+	var imageURLs []string
 
 	// If this is HTML, parse for readable content
-	var imageURLs []string
 	if strings.Contains(contentType, "text/html") {
-		isReadable := readability.IsReadable(readabilityCheckInput)
+		testBytes, err := bufio.NewReader(contentReader).Peek(1024)
+		if err != nil {
+			return book, false, fmt.Errorf("failed to process article: %v", err)
+		}
+		encoding, _, _ := charset.DetermineEncoding(testBytes, "")
 
-		article, err := readability.FromReader(readabilityInput, book.URL)
+		contentReader.Seek(0, 0)
+		decodedBuffer := bytes.NewBuffer(nil)
+		_, err = io.Copy(decodedBuffer, transform.NewReader(contentReader, encoding.NewDecoder()))
+		if err != nil {
+			return book, false, fmt.Errorf("failed to decode html: %v", err)
+		}
+		decodedReader := bytes.NewReader(decodedBuffer.Bytes())
+
+		isReadable := readability.IsReadable(decodedReader)
+
+		decodedReader.Seek(0, 0)
+		article, err := readability.FromReader(decodedReader, book.URL)
 		if err != nil {
 			return book, false, fmt.Errorf("failed to parse article: %v", err)
 		}
+
+		decodedReader.Seek(0, 0)
+		archiveReader = decodedReader
 
 		book.Author = article.Byline
 		book.Content = article.TextContent
@@ -126,7 +139,7 @@ func ProcessBookmark(req ProcessRequest) (model.Bookmark, bool, error) {
 
 		archivalRequest := warc.ArchivalRequest{
 			URL:         book.URL,
-			Reader:      archivalInput,
+			Reader:      archiveReader,
 			ContentType: contentType,
 			UserAgent:   userAgent,
 			LogEnabled:  req.LogArchival,
