@@ -14,7 +14,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/emptyhua/shiori/internal/model"
-	"github.com/go-shiori/warc"
+	"github.com/emptyhua/warc"
 	"github.com/julienschmidt/httprouter"
 )
 

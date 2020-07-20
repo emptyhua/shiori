@@ -5,9 +5,10 @@ go 1.12
 require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/disintegration/imaging v1.6.0
+	github.com/emptyhua/warc v0.0.0-20200720142720-34374fd045b2 // indirect
 	github.com/fatih/color v1.7.0
+	github.com/go-shiori/dom v0.0.0-20200611094855-2cf8a4b8b9eb // indirect
 	github.com/go-shiori/go-readability v0.0.0-20190809152430-5413e9c4ec86
-	github.com/go-shiori/warc v0.0.0-20191003110312-7b3c5582fd83
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/gofrs/uuid v3.2.0+incompatible
 	github.com/jmoiron/sqlx v1.2.0
@@ -20,11 +21,13 @@ require (
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/shurcooL/httpfs v0.0.0-20181222201310-74dc9339e414 // indirect
 	github.com/shurcooL/vfsgen v0.0.0-20181202132449-6a9ea43bcacd
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/cobra v0.0.5
-	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
+	go.etcd.io/bbolt v1.3.5 // indirect
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	golang.org/x/image v0.0.0-20190802002840-cff245a6509b // indirect
-	golang.org/x/net v0.0.0-20190926025831-c00fd9afed17
+	golang.org/x/net v0.0.0-20200707034311-ab3426394381
+	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
 	golang.org/x/text v0.3.2
 	golang.org/x/tools v0.0.0-20190809145639-6d4652c779c4 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
