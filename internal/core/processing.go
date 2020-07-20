@@ -65,7 +65,7 @@ func ProcessBookmark(req ProcessRequest) (model.Bookmark, bool, error) {
 		if err != nil {
 			return book, false, fmt.Errorf("failed to process article: %v", err)
 		}
-		encoding, _, _ := charset.DetermineEncoding(testBytes, "")
+		encoding, _, _ := charset.DetermineEncoding(testBytes, contentType)
 
 		contentReader.Seek(0, 0)
 		decodedBuffer := bytes.NewBuffer(nil)
