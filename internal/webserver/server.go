@@ -56,9 +56,9 @@ func ServeApp(cfg Config) error {
 
 	router.GET(jp("/"), hdl.serveIndexPage)
 	router.GET(jp("/login"), hdl.serveLoginPage)
-	router.GET(jp("/bookmark/:id/thumb"), hdl.serveThumbnailImage)
+	router.GET(jp("/bookmark/:id/thumb"), EtagHandler(hdl.serveThumbnailImage, false))
 	router.GET(jp("/bookmark/:id/content"), hdl.serveBookmarkContent)
-	router.GET(jp("/bookmark/:id/archive/*filepath"), hdl.serveBookmarkArchive)
+	router.GET(jp("/bookmark/:id/archive/*filepath"), EtagHandler(hdl.serveBookmarkArchive, false))
 
 	router.POST(jp("/api/login"), hdl.apiLogin)
 	router.POST(jp("/api/logout"), hdl.apiLogout)

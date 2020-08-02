@@ -5,8 +5,10 @@ go 1.12
 require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/disintegration/imaging v1.6.0
-	github.com/emptyhua/warc v0.0.0-20200720142720-34374fd045b2 // indirect
+	github.com/emptyhua/warc v0.0.0-20200720142720-34374fd045b2
 	github.com/fatih/color v1.7.0
+	github.com/go-http-utils/fresh v0.0.0-20161124030543-7231e26a4b27
+	github.com/go-http-utils/headers v0.0.0-20181008091004-fed159eddc2a
 	github.com/go-shiori/dom v0.0.0-20200611094855-2cf8a4b8b9eb // indirect
 	github.com/go-shiori/go-readability v0.0.0-20190809152430-5413e9c4ec86
 	github.com/go-sql-driver/mysql v1.4.1
