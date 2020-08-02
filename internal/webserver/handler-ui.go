@@ -251,6 +251,8 @@ func (h *handler) serveBookmarkArchive(w http.ResponseWriter, r *http.Request, p
 		}
 	}
 
+	w.Header().Set("Cache-Control", "max-age=86400")
+
 	// Open archive, look in cache first
 	var archive *warc.Archive
 	cacheData, found := h.ArchiveCache.Get(strID)
