@@ -5,7 +5,7 @@ go 1.12
 require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/disintegration/imaging v1.6.0
-	github.com/emptyhua/warc v0.0.0-20200720142720-34374fd045b2
+	github.com/emptyhua/warc v0.1.0
 	github.com/fatih/color v1.7.0
 	github.com/go-http-utils/fresh v0.0.0-20161124030543-7231e26a4b27
 	github.com/go-http-utils/headers v0.0.0-20181008091004-fed159eddc2a
@@ -29,7 +29,7 @@ require (
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	golang.org/x/image v0.0.0-20190802002840-cff245a6509b // indirect
 	golang.org/x/net v0.0.0-20200707034311-ab3426394381
-	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
+	golang.org/x/sys v0.0.0-20200802091954-4b90ce9b60b3 // indirect
 	golang.org/x/text v0.3.2
 	golang.org/x/tools v0.0.0-20190809145639-6d4652c779c4 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
