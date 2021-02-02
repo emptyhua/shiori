@@ -3,6 +3,9 @@
 package main
 
 import (
+	"net/http"
+	_ "net/http/pprof"
+
 	"github.com/emptyhua/shiori/internal/cmd"
 	"github.com/sirupsen/logrus"
 
@@ -16,6 +19,10 @@ import (
 )
 
 func main() {
+	go func() {
+		http.ListenAndServe("127.0.0.1:9101", nil)
+	}()
+
 	err := cmd.ShioriCmd().Execute()
 	if err != nil {
 		logrus.Fatalln(err)
